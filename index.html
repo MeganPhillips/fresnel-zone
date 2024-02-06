@@ -80,34 +80,24 @@ and open the template in the editor.
           rotz[1][0] * d + rotz[1][1] * (-rn[i])
       ]);
 //plotting code
-const avgY = pts_top_rot.map((topPoint, i) => {
-    const bottomPoint = pts_bot_rot[i];
-    return (topPoint[1] + bottomPoint[1]) / 2;
-  });
+const topEllipseData = pts_top_rot.map(([x, y]) => ({ x: x * scale, y: y * scale }));
+const bottomEllipseData = pts_bot_rot.map(([x, y]) => ({ x: x * scale, y: y * scale }));
+
+// Connect the last point of the top ellipse to the first point of the bottom ellipse
+const closedEllipseData = [...topEllipseData, topEllipseData[0], ...bottomEllipseData.reverse()];
+
 const ctx = document.getElementById('myChart').getContext('2d');
 const chart = new Chart(ctx, {
-            type: 'line',
-            data: {
-              datasets:[
+                    type: 'line',
+                data: {
+                    datasets: [
                     {
-                        label: 'Top Ellipse',
-                        data: pts_top_rot.map(([x, y]) => ({ x: x * scale, y: y * scale })),
+                        label: 'Fresnel Zone',
+                        data: closedEllipseData,
                         borderColor: 'rgba(18, 149, 216, 1)',
-                        fill: false
+                        fill: true, // Fill the area enclosed by the ellipse
+                        backgroundColor: 'rgba(18, 149, 216, 0.2)' // Set the fill color
                     },
-                    {
-                        label: 'Bottom Ellipse',
-                        data: pts_bot_rot.map(([x, y]) => ({ x: x * scale, y: y * scale })),
-                        borderColor: 'rgba(255, 181, 17, 1)',
-                        fill: false
-                    },
-                    {
-                        label: 'Ground Level',
-                        data: [{ x: 0, y: 0 }, { x: D_ft, y: avgY[avgY.length - 1] * scale }],
-                        borderColor: 'rgba(0, 0, 0, 1)',
-                        fill: false,
-                        borderDash: [5, 5]
-                    }
                 ]
             },
             options: {
@@ -123,55 +113,5 @@ const chart = new Chart(ctx, {
                 }
             }
         });
-    
-
-      //helper code
-// var step = (2 * Math.PI) / 30;
-      // f = 217.25; // frequency
-      // x1 = 0;
-      // x2 = 15;
-      // y2 = 250;
-      // y1 = 130;
-      // fr = f * Math.pow(10, 6); // frequency in Hz
-      // c = 2.997925 * Math.pow(10, 8); // speed of light
-      // lambda = c / fr;
-      // xarr = [];
-      // yarr = [];
-      // a = (1 / 2) * Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)); // radius of major axis
-      // r = Math.sqrt((lambda * a) / 2); // radius of the minor axis
-      // w = Math.atan2(y2 - y1, x2 - x1);
-      // console.log(w);
-      // for (i = 0; i <= 2 * Math.PI; i += step) {
-      //   xval = a * Math.cos(i);
-      //   yval = r * Math.sin(i);
-      //   xnew = (x1 + x2) / 2 + xval * Math.cos(w) - yval * Math.sin(w);
-      //   ynew = (y1 + y2) / 2 + xval * Math.sin(w) + yval * Math.cos(w);
-      //   xarr.push(xnew);
-      //   yarr.push(ynew);
-      // }
-      // console.log(xarr);
-      // const data = {
-      //   labels: xarr,
-      //   datasets: [
-      //     {
-      //       data: yarr,
-      //       borderColor: "rgba(0,0,0,1)",
-      //     },
-      //   ],
-      // };
-      // const config = {
-      //   type: "line",
-      //   data: data,
-      //   options: {
-      //     scales: {
-      //       x: {      
-      //           type: 'linear',
-      //       },
-      //     },
-      //   },
-      // };
-      // const mychart = new Chart(document.getElementById("myChart"), config);
-
-    
     </script> 
 </html>
