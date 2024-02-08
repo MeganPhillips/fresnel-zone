@@ -25,20 +25,34 @@ and open the template in the editor.
     <body>
         <div class="container-fluid">
         <h1 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">test 2</h1>
-        <!-- <div class = "row">
-          Radio Frequency (in Hz): <input type="int" id="myText" value="2400000000">
-          <!-- Distance (in ft): <input type="int" id="myText" value="400">
-          Altitude (in ft): <input type="int" id="myText" value="100"> -->
+        <form id = "testForm">
+            <label for="rFrequency"> Enter Radio Frequency (Hz): </label><br>
+            <input type="text" id="rFrequency" name="rFrequency" placeholder="2400000000"><br>
+        
+            <label for="fDistance"> Enter Flight Distance (ft): </label><br>
+            <input type="text" id="fDistance" name="fDistance" placeholder="400"><br>
+            
+            <label for="fAltitude"> Enter Flight Altitude (ft): </label><br>
+            <input type="text" id="fAltitude" name="fAltitude" placeholder="100"><br>
+            
+            <button type="button" id = "fSubmit" class="btn btn-primary">Enter</button>
 
-          <!-- <p>Click the button to display the value of the value attribute of the text field.</p>
-          <button onclick="fresnelInput()">Try it</button>
-          <p id="demo"></p>
-        </div> --> 
+        </form>
         <canvas id="myChart"></canvas>
      
         </div>
     </body>
     <script>
+        fSubmit.onclick = function(){
+        window.alert("hello world");
+        // var f_hz = document.getElementById("rFrequency");
+        // var D_ft = document.getElementById("fDistance");
+        // var Alt_ft = document.getElementById("fAltitude");
+
+        // textElement = document.querySelector(#fSubmit)
+        // output = textElement.value;
+        // var fresnel = 
+    }
       //constants 
       const C = 299792458; // speed of light in m/s
       const scale = 3.28084; // m to feet conversion
