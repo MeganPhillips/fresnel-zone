@@ -24,34 +24,31 @@ and open the template in the editor.
     </head>
     <body>
         <div class="container-fluid">
-        <h1 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">test 2</h1>
-        <form id = "testForm">
-            <label for="rFrequency"> Enter Radio Frequency (Hz): </label><br>
-            <input type="text" id="rFrequency" name="rFrequency" placeholder="2400000000"><br>
-        
-            <label for="fDistance"> Enter Flight Distance (ft): </label><br>
-            <input type="text" id="fDistance" name="fDistance" placeholder="400"><br>
-            
-            <label for="fAltitude"> Enter Flight Altitude (ft): </label><br>
-            <input type="text" id="fAltitude" name="fAltitude" placeholder="100"><br>
-            
-            <button type="button" id = "fSubmit" class="btn btn-primary">Enter</button>
-
+        <h1 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Fresnel Zone</h1>
+        <form id="frequencyFrom">
+            <h5>Select Drone Radio Frequency (GHz):</h5>
+            <input type="radio" name="frequency" id="2.4" value="2.4"">
+            <label for="option1">2.4</label><br>
+            <input type="radio" name="frequency" id="5.8" value="5.8" ">
+            <label for="option1">5.8</label>
         </form>
+        <button type="button" id = "fSubmit" >Enter</button>
+       
+        <div id="frequencyResult"></div>
         <canvas id="myChart"></canvas>
      
         </div>
     </body>
     <script>
-        fSubmit.onclick = function(){
-        window.alert("hello world");
-        // var f_hz = document.getElementById("rFrequency");
-        // var D_ft = document.getElementById("fDistance");
-        // var Alt_ft = document.getElementById("fAltitude");
+        fSubmit.onclick = function() {
+      var selectedFrequency = document.querySelector('input[name="frequency"]:checked');
 
-        // textElement = document.querySelector(#fSubmit)
-        // output = textElement.value;
-        // var fresnel = 
+      if (selectedFrequency) {
+        var frequencyValue = selectedFrequency.value;
+        window.alert("Selected frequency: " + frequencyValue);
+      } else {
+        document.getElementById('frequencyResult').innerText = "Please select a frequency option.";
+      }
     }
       //constants 
       const C = 299792458; // speed of light in m/s
